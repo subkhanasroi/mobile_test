@@ -1,0 +1,21 @@
+import 'package:shared_preferences/shared_preferences.dart';
+
+class SessionManager {
+  late int idUser;
+
+  Future<void> saveSession(int myId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('id', myId ?? 0);
+  }
+
+  Future getSession() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    idUser = prefs.getInt("id")!;
+    return idUser;
+  }
+
+  Future clearSession() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+  }
+}
